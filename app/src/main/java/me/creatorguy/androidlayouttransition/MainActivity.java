@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.transition.Scene;
 import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         scene1 = Scene.getSceneForLayout(sceneRoot, R.layout.scene1, this);
         scene2 = Scene.getSceneForLayout(sceneRoot, R.layout.scene2, this);
 
+        transition = TransitionInflater.from(this).inflateTransition(R.transition.example_2);
+
         scene1.enter();
         currentScene = scene1;
     }
@@ -38,10 +41,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.clMain:
                 if(currentScene == scene1) {
-                    TransitionManager.go(scene2);
+                    TransitionManager.go(scene2, transition);
                     currentScene = scene2;
                 } else {
-                    TransitionManager.go(scene1);
+                    TransitionManager.go(scene1, transition);
                     currentScene = scene1;
                 }
                 break;
