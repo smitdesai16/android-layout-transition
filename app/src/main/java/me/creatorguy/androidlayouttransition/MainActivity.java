@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.transition.Scene;
 import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ViewGroup sceneRoot = findViewById(R.id.sceneRoot);
         scene1 = Scene.getSceneForLayout(sceneRoot, R.layout.scene1, this);
+        scene2 = Scene.getSceneForLayout(sceneRoot, R.layout.scene2, this);
+
         scene1.enter();
         currentScene = scene1;
     }
@@ -34,7 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.clMain:
-
+                if(currentScene == scene1) {
+                    TransitionManager.go(scene2);
+                    currentScene = scene2;
+                } else {
+                    TransitionManager.go(scene1);
+                    currentScene = scene1;
+                }
                 break;
         }
     }
